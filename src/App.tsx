@@ -6,7 +6,7 @@ export const App: React.FC = ({children}) => {
     const didomiConfig = {
         apiKey: '4783d326-7837-4548-aa35-69967e034881',
         app: {apiKey: '4783d326-7837-4548-aa35-69967e034881'},
-        components: {version: 2},
+        components: {version: 2, helpersEnabled: true, componentsEnabled: true },
         user: {
             shouldReadTokenFromLocalStorage: true,
         },
