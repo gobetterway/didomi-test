@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {DidomiSDK} from '@didomi/react'
 import {ConsentWidget} from "./ContentWidget";
 
@@ -7,12 +7,19 @@ declare global {
 }
 
 export const App: React.FC = ({children}) => {
+    const [lang, setLang] = useState('fr')
+
+    const toogleLanguage = () => {
+        if (lang === 'fr') setLang('en')
+        else setLang('fr')
+    }
+
 
     window.didomiWidgetsOnReady = window.didomiWidgetsOnReady || [];
     // @ts-ignore
     window.didomiWidgetsOnReady.push(async (DidomiWidgets) => {
         const container = await DidomiWidgets.getContainerById("enzLbVW3");
-        container.setWidgetLocale("fr");
+        container.setWidgetLocale(lang);
     })
 
     const didomiConfig = {
@@ -24,6 +31,7 @@ export const App: React.FC = ({children}) => {
         },
         widgets: [],
     }
+
 
     return (<>
         <DidomiSDK
@@ -77,6 +85,11 @@ export const App: React.FC = ({children}) => {
                 console.log('Didomi Preferences Click Vendor Save Choices')
             }
         />
+        <div>
+            <button onClick={toogleLanguage}>Language:</button>
+            <span> {lang}</span>
+        </div>
+
         <ConsentWidget/>
     </>)
 }
