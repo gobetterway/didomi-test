@@ -4,12 +4,12 @@ import React, {useState} from "react";
 export const ConsentWidget: React.FC = () => {
     const [display, setDisplay] = useState(false)
 
-    const displayConstent = () => setDisplay(!display)
+    const displayConsent = () => setDisplay(!display)
 
     // @ts-ignore
     return (
         <div>
-            <button onClick={displayConstent}>Display constent</button>
+            <button onClick={displayConsent}>Display consent</button>
             {display ? (
                 <>
                     <b>Consent : </b>
