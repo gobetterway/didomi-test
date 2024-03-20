@@ -32,7 +32,6 @@ export const App: React.FC = ({children}) => {
         widgets: [],
     }
 
-
     return (<>
         <DidomiSDK
             apiKey='4783d326-7837-4548-aa35-69967e034881'
