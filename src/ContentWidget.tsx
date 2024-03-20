@@ -13,7 +13,7 @@ export const ConsentWidget: React.FC = () => {
             {display ? (
                 <>
                     <b>Consent : </b>
-                    <didomi-container id="enzLbVW3"></didomi-container>
+                    <didomi-container id="qNw93nib"></didomi-container>
                 </>
             ) : (
                 <></>
