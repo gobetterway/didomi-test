@@ -20,7 +20,7 @@ export const ConsentWidget: React.FC = () => {
             const entities = await container.getEntities();
             setContainer(container);
             setEntities(entities);
-            console.log(entities)
+            console.log(container)
         });
     }, []);
 
@@ -33,8 +33,15 @@ export const ConsentWidget: React.FC = () => {
                     <b>Consent : </b>
                     {/* IMPORTANT: Wrap all your widget related elements in didomi-container-headless */}
                     <didomi-container-headless id="WFN4hfn4">
+                        <didomi-if-not-authenticated container-id="WFN4hfn4">
+                            <p> I am displayed when end-user is not authenticated </p>
+                        </didomi-if-not-authenticated>
+                        <didomi-if-authenticated container-id="WFN4hfn4">
+                            <p> I am displayed when end-user is authenticated </p>
+                        </didomi-if-authenticated>
                         {container && (
                             <>
+                                <h1>My Headless Widget Demo</h1>
                                 {/* IMPORTANT: Add didomi-consent-asked on your page if you want to send an analytics event when displaying your preference center */}
                                 <didomi-consent-asked
                                     container-id={container.id}
@@ -56,7 +63,7 @@ export const ConsentWidget: React.FC = () => {
 
                                     {/* IMPORTANT: Wrap your consent form inside didomi-pending-consent-receiver (if using pending consents) */}
                                     <didomi-pending-consent-receiver container-id={container.id}>
-                                        {entities }
+                                        {entities}
                                     </didomi-pending-consent-receiver>
                                 </didomi-if-authenticated>
                             </>
