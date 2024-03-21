@@ -8,6 +8,13 @@
       widgets: []
     };
   </script>
+  <script>
+    window.didomiWidgetsOnReady = window.didomiWidgetsOnReady || [];
+    window.didomiWidgetsOnReady.push(async (DidomiWidgets) => {
+      const container = await DidomiWidgets.getContainerById("enzLbVW3");
+      container.setWidgetLocale("fr");
+    }, []);
+  </script>
   <script type="text/javascript" async="true" charset="utf-8"
           src="https://sdk.privacy-center.org/v2/loader.js"></script>
 </header>
