@@ -1,25 +1,31 @@
-import React, {useState} from 'react'
+import React, {createContext, useState} from 'react'
 import {DidomiSDK} from '@didomi/react'
 import {ConsentWidget} from "./ContentWidget";
 
 declare global {
     interface Window { didomiWidgetsOnReady: any; }
 }
-
+export  const DidomiContext = createContext({})
 export const App: React.FC = ({children}) => {
     const [lang, setLang] = useState('fr')
-
     const toogleLanguage = () => {
         if (lang === 'fr') setLang('en')
         else setLang('fr')
     }
 
+    const [container, setContainer] = useState(null)
+    const [entities, setEntities] = useState(null)
 
     window.didomiWidgetsOnReady = window.didomiWidgetsOnReady || [];
     // @ts-ignore
     window.didomiWidgetsOnReady.push(async (DidomiWidgets) => {
-        const container = await DidomiWidgets.getContainerById("enzLbVW3");
-        container.setWidgetLocale(lang);
+        const didomiContainer = await DidomiWidgets.getContainerById("WFN4hfn4");
+        const didomiEntities = await didomiContainer.getEntities();
+        if (didomiContainer.translations) {
+            didomiContainer.setWidgetLocale(lang);
+        }
+        setContainer(didomiContainer)
+        setEntities(didomiEntities)
     })
 
     const didomiConfig = {
@@ -89,6 +95,10 @@ export const App: React.FC = ({children}) => {
             <span> {lang}</span>
         </div>
 
-        <ConsentWidget/>
+        {container && entities &&
+            <DidomiContext.Provider value={{container, entities}}>
+                <ConsentWidget/>
+            </DidomiContext.Provider>
+        }
     </>)
 }
