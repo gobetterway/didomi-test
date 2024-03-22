@@ -1,8 +1,8 @@
 import React, {useState, useRef, useContext} from "react";
-import {Card, Checkbox,} from "antd";
+import {Card, Switch,} from "antd";
 import {DidomiContext} from "./App";
 
-export const Section: React.FC = () => {
+export const ConsentPurpose: React.FC = () => {
     const didomiObjects: any = useContext(DidomiContext);
     const container = didomiObjects.container;
     const entities = didomiObjects.entities;
@@ -15,12 +15,12 @@ export const Section: React.FC = () => {
     const sectionRef = useRef(null);
 
     const sendPurposeConsent = (event:any) => {
-        setPurposeEnabled(event.detail);
+        setPurposeEnabled(event);
         // IMPORTANT: Dispatch a 'didomi:set-pending-consents' event with the enabled value of the purpose to store the consent in a pending state
         const consentToPurpose = new CustomEvent("didomi:set-pending-consents", {
             detail: {
                 purposeId: id,
-                value: event.detail,
+                value: event,
             },
             bubbles: true,
             composed: true,
@@ -30,7 +30,7 @@ export const Section: React.FC = () => {
     };
 
     return (
-        <div className="Section" ref={sectionRef}>
+        <div ref={sectionRef}>
             <Card>
                 {/* IMPORTANT: Use 'didomi-entity-content' to display your entities translated content */}
 
@@ -40,7 +40,7 @@ export const Section: React.FC = () => {
                         entity-id={id}
                         entity-property="name"
                         entity-type="purpose"
-                        container-id="WFN4hfn4"
+                        container-id={container.id}
                         with-component-content={true}
                     >{   /* @ts-ignore*/}
                     </didomi-entity-content>
@@ -53,15 +53,14 @@ export const Section: React.FC = () => {
                     entity-id={id}
                     entity-property="description"
                     entity-type="purpose"
-                    container-id="WFN4hfn4"
+                    container-id={container.id}
                     with-component-content={true}
                 >{   /* @ts-ignore*/}
                 </didomi-entity-content>
-                <Checkbox
+                <Switch
                     checked={purposeEnabled}
                     onChange={sendPurposeConsent}
-                >
-                </Checkbox>
+                />
             </Card>
         </div>
     );

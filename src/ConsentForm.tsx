@@ -1,13 +1,11 @@
 import React, {useContext, useEffect, useRef, useState} from "react";
 import {Button} from "antd";
-import {Section} from "./Section";
+import {ConsentPurpose} from "./ConsentPurpose";
 import {DidomiContext} from "./App";
 
-export const Sections: React.FC = () => {
+export const ConsentForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const buttonRef = useRef(null);
-    const didomiObjects: any = useContext(DidomiContext);
-    const entities = didomiObjects.entities;
 
     const savePendingConsents = () => {
         // IMPORTANT: Dispatch a 'didomi:save-pending-consents' custom event when the user wants to save its pending consents.
@@ -67,18 +65,16 @@ export const Sections: React.FC = () => {
     });
 
     return (
-        <div className="sections">
-
-                <Section></Section>
-
-            {/*<Button*/}
-            {/*    className="save-consents-button"*/}
-            {/*    onClick={savePendingConsents}*/}
-            {/*    ref={buttonRef}*/}
-            {/*    disabled={loading}*/}
-            {/*>*/}
-            {/*    SAVE*/}
-            {/*</Button>*/}
+        <div>
+            <ConsentPurpose></ConsentPurpose>
+            <Button
+                className="save-consents-button"
+                onClick={savePendingConsents}
+                ref={buttonRef}
+                disabled={loading}
+            >
+                SAVE
+            </Button>
         </div>
     );
 }
