@@ -5,7 +5,7 @@ import {ConsentWidget} from "./ContentWidget";
 declare global {
     interface Window { didomiWidgetsOnReady: any; }
 }
-export  const DidomiContext = createContext({})
+export const DidomiContext = createContext({})
 export const App: React.FC = ({children}) => {
     const [lang, setLang] = useState('fr')
 
@@ -18,7 +18,7 @@ export const App: React.FC = ({children}) => {
         }
     }
 
-    const [container, setContainer] = useState({})
+    const [container, setContainer] = useState({id:"WFN4hfn4"})
     const [entities, setEntities] = useState({
         purposes: [],
     });
@@ -30,6 +30,7 @@ export const App: React.FC = ({children}) => {
 
         const didomiContainer = await DidomiWidgets.getContainerById("WFN4hfn4");
         const didomiEntities = await didomiContainer.getEntities();
+        console.log(didomiContainer)
         setContainer(didomiContainer)
         setEntities(didomiEntities)
 

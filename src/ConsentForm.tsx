@@ -66,7 +66,7 @@ export const ConsentForm: React.FC = () => {
 
     return (
         <div>
-            <ConsentPurpose></ConsentPurpose>
+            <ConsentPurpose/>
             <Button
                 className="save-consents-button"
                 onClick={savePendingConsents}
